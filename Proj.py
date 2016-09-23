@@ -5,7 +5,6 @@ Created on Wed Jun 15 11:41:44 2016
 @author: Carprees
 """
 
-
 import Utilidades.RNA_util as rna  
 from test import start_test, continue_test, special_test    
     
@@ -47,7 +46,7 @@ from test import start_test, continue_test, special_test
 #        val=False,
 #        trainShared=False,
 #        im_dim=[42, 42], 
-#        savename='TrainedModels/mierda.pkl'
+#        savename='TrainedModels/prueba.pkl'
 #        )
         
 ### Para seguir entrenando un modelo anterior ###  
@@ -57,8 +56,8 @@ from test import start_test, continue_test, special_test
 #        L1_reg=0.00, 
 #        L2_reg=0.0001, 
 #        n_epochs=10,
-#        dataset='data/new_emotions_datAug2.h5', 
-#        model='TrainedModels/replica_OxfordRedDatAugEntr.pkl',
+#        dataset='data/new_emotions_datAug3.h5', 
+#        model='TrainedModels/prueba.pkl',
 #        batch_size=194, 
 #        n_hidden=[1024], 
 #        n_out=7, 
@@ -70,14 +69,14 @@ from test import start_test, continue_test, special_test
 #        val=False,
 #        trainShared=False,
 #        im_dim=[42, 42], 
-#        savename='TrainedModels/replica_OxfordRedDatAugEntr_cont.pkl'
+#        savename='TrainedModels/prueba_cont.pkl'
 #        )  
  
 ### Para testear un modelo anterior ### 
        
 special_test(
         dataset='data/new_emotions_datAug.h5', 
-        model='TrainedModels/mierda.pkl',
+        model='TrainedModels/pruebaEntr.pkl',
         batch_size=3589, # 194, 3589, 1794, 2392, 1435, 1196 # train 3022
         n_hidden=[1024], 
         n_out=7, 
@@ -88,6 +87,3 @@ special_test(
         gaussian_std=0.,
         im_dim=[42, 42], 
         )
-
-
-
