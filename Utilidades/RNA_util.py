@@ -23,7 +23,7 @@ def dropout_conv(input, isTrain, p=0, n_filters = 1, im_shape = 2):
     if p > 0:
         srng = RandomStreams(rand.randint(1, 2147462579))
         retain_prob = 1 - p
-        input = theano.ifelse.ifelse(isTrain, input*srng.binomial((n_filters,), p=retain_prob, dtype=theano.config.floatX).dimshuffle('x', 0,'x','x'), 
+        input = theano.ifelse.ifelse(isTrain, input*srng.binomial((n_filters, im_shape,), p=retain_prob, dtype=theano.config.floatX).dimshuffle(1, 0,'x','x'), 
                                      input*retain_prob)
     return input
 
