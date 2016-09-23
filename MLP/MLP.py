@@ -29,7 +29,6 @@ References:
 
 __docformat__ = 'restructedtext en'
 
-
 import numpy
 
 import theano
@@ -106,8 +105,7 @@ class LogisticRegression(object):
             self.p_y_given_x = T.nnet.softmax(self.bn_output)
         
         else:   
-#            self.linear = T.sum(self.linear, axis = 0)
-            
+
             self.p_y_given_x = T.nnet.softmax(self.linear) 
             
             # parameters of the model
