@@ -314,11 +314,11 @@ class YichuanConv(object):
         # Reshape matrix of rasterized images of shape (batch_size, x * y)
         # to a 4D tensor.
         # (28, 28) is the size of MNIST images.
-        # (48, 48) is the size of MNIST images.
+        # (48, 48) is the size of Emotions images.
         
         self.input = input.reshape((batch_size, 1, im_dim[0], im_dim[1]))       
         
-        # First convPool layer filters 64 3*3
+        # First convPool layer filters 32 5*5
         self.convLayers = [ConvLayer(
             rng,
             input=self.input,
@@ -334,7 +334,7 @@ class YichuanConv(object):
             gaussian_std=gaussian_std
         )]
         
-        # Second convPool layer filters 128 3*3
+        # Second convPool layer filters 32 4*4
         self.convLayers.append(ConvLayer(
             rng,
             input=self.convLayers[0].output,
@@ -351,7 +351,7 @@ class YichuanConv(object):
         ))
         
        
-        # Third conv + convPool layer filters 256 3*3
+        # Third conv + convPool layer filters 64 3*3
         self.convLayers.append(ConvLayer(
             rng,
             input=self.convLayers[1].output,
@@ -398,7 +398,7 @@ class OxfordNet11LayerRed(object):
         # Reshape matrix of rasterized images of shape (batch_size, x * y)
         # to a 4D tensor.
         # (28, 28) is the size of MNIST images.
-        # (48, 48) is the size of MNIST images.
+        # (48, 48) is the size of Emotions images.
         
         self.input = input.reshape((batch_size, 1, im_dim[0], im_dim[1]))       
         
@@ -465,7 +465,6 @@ class OxfordNet11LayerRed(object):
             gaussian_std=gaussian_std
         ))
                        
-            
         self.params = ut.unlist([layer.params for layer in self.convLayers])
         
         if(batch_norm):
@@ -741,7 +740,6 @@ class ResidualNet18Layer(object):
             gaussian_std=gaussian_std
         ))
         
-
         self.params = ut.unlist([layer.params for layer in self.convLayers])
         
         if(batch_norm):
@@ -853,7 +851,7 @@ class ResidualNet18LayerRed(object):
             gaussian_std=gaussian_std
         ))
 
-        # 2 x Residual layer 256@3x3
+        # 2 x Residual layer 128@3x3
         
         self.convLayers.append(ResidualLayer(
             rng,
@@ -991,7 +989,7 @@ class MiniResidual(object):
         
         self.input = input.reshape((batch_size, 1, im_dim[0], im_dim[1]))  
 
-        # 32 @ 5 x 5
+        # 32 @ 3 x 3
         self.convLayers = [ResidualLayer(
             rng,
             input=self.input,
@@ -1008,7 +1006,7 @@ class MiniResidual(object):
             gaussian_std=gaussian_std
         )] 
         
-        # 32 @ 5 x 5
+        # 32 @ 3 x 3
         self.convLayers.append(ResidualLayer(
             rng,
             input=self.convLayers[0].output,
@@ -1040,7 +1038,7 @@ class MiniResidual(object):
             gaussian_std=gaussian_std
         ))
         
-        # Residual layer 64@5x5        
+        # Residual layer 64@3x3        
         self.convLayers.append(ResidualLayer(
             rng,
             input=self.convLayers[2].output,
